@@ -112,7 +112,7 @@ static gboolean state_machine_cb(gpointer) {
             break;
 
         case Phase::PAUSED:
-            set_pipeline_state(GST_STATE_NULL, "READY");
+            set_pipeline_state(GST_STATE_READY, "READY");
             phase = Phase::READY;
 
             // NULL for 1 second
@@ -120,7 +120,7 @@ static gboolean state_machine_cb(gpointer) {
             break;
         
         case Phase::READY:
-            set_pipeline_state(GST_STATE_READY, "NULL");
+            set_pipeline_state(GST_STATE_NULL, "NULL");
             gst_object_unref(pipeline);
 
             pipeline = create_pipeline("10.0.0.2", 5000);
