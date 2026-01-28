@@ -104,15 +104,7 @@ static gboolean state_machine_cb(gpointer) {
             break;
 
         case Phase::PLAYING:
-            set_pipeline_state(GST_STATE_PAUSED, "READY");
-            phase = Phase::READY;
-
-            // PAUSED for 1 second
-            arm_next_state_timer(1);
-            break;
-
-        case Phase::READY:
-            set_pipeline_state(GST_STATE_READY, "PAUSED");
+            set_pipeline_state(GST_STATE_PAUSED, "PAUSED");
             phase = Phase::PAUSED;
 
             // PAUSED for 1 second
@@ -120,13 +112,21 @@ static gboolean state_machine_cb(gpointer) {
             break;
 
         case Phase::PAUSED:
-            set_pipeline_state(GST_STATE_NULL, "NULL");
+            set_pipeline_state(GST_STATE_NULL, "READY");
+            phase = Phase::READY;
+
+            // NULL for 1 second
+            arm_next_state_timer(1);
+            break;
+        
+        case Phase::READY:
+            set_pipeline_state(GST_STATE_READY, "NULL");
             gst_object_unref(pipeline);
 
             pipeline = create_pipeline("10.0.0.2", 5000);
             phase = Phase::NULL_STATE;
 
-            // NULL for 1 second
+            // PAUSED for 1 second
             arm_next_state_timer(1);
             break;
     }
