@@ -70,6 +70,7 @@ static void set_pipeline_state(GstState state, const char *name) {
 enum class Phase {
     PLAYING,
     PAUSED,
+    READY,
     NULL_STATE
 };
 
@@ -103,7 +104,15 @@ static gboolean state_machine_cb(gpointer) {
             break;
 
         case Phase::PLAYING:
-            set_pipeline_state(GST_STATE_PAUSED, "PAUSED");
+            set_pipeline_state(GST_STATE_PAUSED, "READY");
+            phase = Phase::READY;
+
+            // PAUSED for 1 second
+            arm_next_state_timer(1);
+            break;
+
+        case Phase::READY:
+            set_pipeline_state(GST_STATE_READY, "PAUSED");
             phase = Phase::PAUSED;
 
             // PAUSED for 1 second
