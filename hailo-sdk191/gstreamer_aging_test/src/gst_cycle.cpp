@@ -68,12 +68,14 @@ static void set_pipeline_state(GstState state, const char *name) {
  * State machine
  * ======================= */
 enum class Phase {
+    NULL_STATE,
     PLAYING,
     PAUSED,
-    NULL_STATE
+    READY
 };
 
 static Phase phase = Phase::NULL_STATE;
+static int phase_mode = 3; // default
 
 /* -----------------------
  * Timer re-arm helper
@@ -91,39 +93,48 @@ static void arm_next_state_timer(guint seconds) {
  * ----------------------- */
 static gboolean state_machine_cb(gpointer) {
     state_tick++;
-    std::cerr << "[STATE_TICK] #" << state_tick << std::endl;
+    std::cerr << "[STATE_TICK] #" << state_tick
+              << " (phase=" << phase_mode << ")\n";
 
     switch (phase) {
         case Phase::NULL_STATE:
             set_pipeline_state(GST_STATE_PLAYING, "PLAYING");
             phase = Phase::PLAYING;
-
-            // PLAYING for 30 seconds
             arm_next_state_timer(10);
             break;
 
         case Phase::PLAYING:
             set_pipeline_state(GST_STATE_PAUSED, "PAUSED");
             phase = Phase::PAUSED;
-
-            // PAUSED for 1 second
             arm_next_state_timer(1);
             break;
 
         case Phase::PAUSED:
-            set_pipeline_state(GST_STATE_READY, "NULL");
-            gst_object_unref(pipeline);
+            if (phase_mode == 4) {
+                set_pipeline_state(GST_STATE_READY, "READY");
+                phase = Phase::READY;
+                arm_next_state_timer(1);
+            } else {
+                set_pipeline_state(GST_STATE_NULL, "NULL");
+                gst_object_unref(pipeline);
+                pipeline = create_pipeline("10.0.0.2", 5000);
+                phase = Phase::NULL_STATE;
+                arm_next_state_timer(1);
+            }
+            break;
 
+        case Phase::READY:
+            set_pipeline_state(GST_STATE_NULL, "NULL");
+            gst_object_unref(pipeline);
             pipeline = create_pipeline("10.0.0.2", 5000);
             phase = Phase::NULL_STATE;
-
-            // NULL for 1 second
             arm_next_state_timer(1);
             break;
     }
 
-    return G_SOURCE_REMOVE; // one-shot timer
+    return G_SOURCE_REMOVE;
 }
+
 
 /* =======================
  * Tee → queue helper
@@ -204,10 +215,47 @@ static GstElement* create_pipeline(const std::string &host, int port) {
     return pipe;
 }
 
+static void print_help(const char *prog) {
+    std::cout <<
+        "Usage: " << prog << " [OPTIONS]\n\n"
+        "Options:\n"
+        "  -h, --help        Show this help message and exit\n"
+        "   --phase 3        NULL → PLAYING → PAUSED → NULL (default)\n"
+        "   --phase 4        NULL → PLAYING → PAUSED → READY → NULL\n\n"
+        "Description:\n"
+        "  GStreamer pipeline stress/aging test tool.\n"
+        "  - Periodically switches pipeline state:\n"
+        "      NULL -> PLAYING -> PAUSED -> NULL (recreate)\n"
+        "  - Logs FPS every 5 seconds using identity handoff.\n"
+        "  - Streams H.264 over UDP and measures internal frame flow.\n\n"
+        "Signals:\n"
+        "  SIGINT (Ctrl+C)    Graceful shutdown\n"
+        << std::endl;
+}
+
 /* =======================
  * Main
  * ======================= */
 int main(int argc, char *argv[]) {
+    for (int i = 1; i < argc; ++i) {
+        std::string arg = argv[i];
+
+        if (arg == "--help" || arg == "-h") {
+            print_help(argv[0]);
+            return 0;
+        }
+
+        if (arg == "--phase" && i + 1 < argc) {
+            phase_mode = std::stoi(argv[i + 1]);
+            i++;
+        }
+    }
+
+    if (phase_mode != 3 && phase_mode != 4) {
+        std::cerr << "[ERROR] --phase must be 3 or 4\n";
+        return -1;
+    }
+
     gst_init(&argc, &argv);
     std::signal(SIGINT, handle_sigint);
 
