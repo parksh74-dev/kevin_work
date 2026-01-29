@@ -1,0 +1,79 @@
+[STATE] -> PLAYING                                                                                                                                                                                     [FPS] stage=PLAYING fps=16
+[FPS] stage=PLAYING fps=30
+[STATE_TICK] #392 (phase=3)
+[STATE] -> PAUSED
+[STATE_TICK] #393 (phase=3)
+[STATE] -> NULL
+[FPS] stage=NULL fps=12.2
+[STATE_TICK] #394 (phase=3)
+[STATE] -> PLAYING
+[FPS] stage=PLAYING fps=16
+[FPS] stage=PLAYING fps=30.4
+[STATE_TICK] #395 (phase=3)
+[STATE] -> PAUSED
+[STATE_TICK] #396 (phase=3)
+[STATE] -> NULL
+[FPS] stage=NULL fps=11.8
+[STATE_TICK] #397 (phase=3)
+[STATE] -> PLAYING
+[FPS] stage=PLAYING fps=16
+[FPS] stage=PLAYING fps=30
+[STATE_TICK] #398 (phase=3)
+[STATE] -> PAUSED
+[STATE_TICK] #399 (phase=3)
+[STATE] -> NULL
+[FPS] stage=NULL fps=12.2
+[STATE_TICK] #400 (phase=3)
+[STATE] -> PLAYING
+[FPS] stage=PLAYING fps=3.6
+[FPS] stage=PLAYING fps=18.8
+[STATE_TICK] #401 (phase=3)
+[STATE] -> PAUSED
+[STATE_TICK] #402 (phase=3)
+[STATE] -> NULL
+[FPS] stage=NULL fps=11.4
+[STATE_TICK] #403 (phase=3)
+[STATE] -> PLAYING
+[FPS] stage=PLAYING fps=15.6
+[2018-03-09 13:16:44.457] [648] [13845] [hailo_media_library] [buffer_pool] [error] [buffer_pool.cpp:174] [acquire] multi_resize_output_0 pool1920x1080_10_y: Buffer acquire failed - no available buffers remaining, please validate the max buffers size you set (10)
+[2018-03-09 13:16:44.536] [648] [13845] [hailo_media_library] [buffer_pool] [error] [buffer_pool.cpp:174] [acquire] multi_resize_output_0 pool1920x1080_10_y: Buffer acquire failed - no available buffers remaining, please validate the max buffers size you set (10)
+[2018-03-09 13:16:44.537] [648] [13845] [hailo_media_library] [buffer_pool] [error] [buffer_pool.cpp:174] [acquire] multi_resize_output_0 pool1920x1080_10_y: Buffer acquire failed - no available buffers remaining, please validate the max buffers size you set (10)
+[FPS] stage=PLAYING fps=2.4
+[STATE_TICK] #404 (phase=3)
+[STATE] -> PAUSED
+[2018-03-09 13:16:49.737] [648] [13845] [hailo_media_library] [buffer_pool] [error] [buffer_pool.cpp:174] [acquire] multi_resize_output_0 pool1920x1080_10_y: Buffer acquire failed - no available buffers remaining, please validate the max buffers size you set (10)
+[2018-03-09 13:16:50.799] [648] [13845] [hailo_media_library] [buffer_pool] [error] [buffer_pool.cpp:174] [acquire] multi_resize_output_0 pool1920x1080_10_y: Buffer acquire failed - no available buffers remaining, please validate the max buffers size you set (10)
+[2018-03-09 13:16:51.588] [648] [13845] [hailo_media_library] [buffer_pool] [error] [buffer_pool.cpp:174] [acquire] multi_resize_output_0 pool1920x1080_10_y: Buffer acquire failed - no available buffers remaining, please validate the max buffers size you set (10)
+[FPS] stage=PAUSED fps=0.6
+[2018-03-09 13:16:52.609] [648] [13845] [hailo_media_library] [buffer_pool] [error] [buffer_pool.cpp:174] [acquire] multi_resize_output_0 pool1920x1080_10_y: Buffer acquire failed - no available buffers remaining, please validate the max buffers size you set (10)
+[STATE_TICK] #405 (phase=3)
+[STATE] -> NULL
+[STATE_TICK] #406 (phase=3)
+[STATE] -> PLAYING
+[FPS] stage=PLAYING fps=0
+[2018-03-09 13:16:59.367] [648] [13923] [hailo_media_library] [buffer_pool] [error] [buffer_pool.cpp:174] [acquire] multi_resize_output_0 pool1920x1080_10_y: Buffer acquire failed - no available buffers remaining, please validate the max buffers size you set (10)
+[FPS] stage=PLAYING fps=0
+[FPS] stage=PLAYING fps=0
+[STATE_TICK] #407 (phase=3)
+[STATE] -> PAUSEDget_ext_ctrls ioctl VIDIOC_G_EXT_CTRLS failed with -1, errno: 11
+
+get_ext_ctrls ioctl VIDIOC_G_EXT_CTRLS failed with -1, errno: 11
+[2018-03-09 13:17:55.613] [648] [13923] [hailo_media_library] [buffer_pool] [error] [buffer_pool.cpp:174] [acquire] multi_resize_output_0 pool1920x1080_10_y: Buffer acquire failed - no available buffers remaining, please validate the max buffers size you set (10)
+^[[B^[[B^[[B^[[B^[[B^[[B^[[B^[[B^[[B^[[B^[[B^[[B^[[D^[[B^[[B^[[B^[[B^[[B^[[B^[[B^[[B^[[B^[[B^[[B^[[B^[[B^[[B^[[B^[[B^[[B^[[B^[[B^[[B^[[B
+^[[A^[[B^[[B^[[B^[[B^[[B^[[B^[[A^[[A^[[A^[[A^[[A^[[B^[[B^[[B^[[B^[[B^[[A^[[A^[[A^[[A^[[A^[[A^[[A^[[B^[[B^[[B^[[B^[[A^[[Aq[2018-03-09 13:18:06.619] [648] [13923] [hailo_media_library] [buffer_pool] [error] [bu
+ffer_pool.cpp:174] [acquire] multi_resize_output_0 pool1920x1080_10_y: Buffer acquire failed - no available buffers remaining, please validate the max buffers size you set (10)
+[2018-03-09 13:18:06.835] [648] [13923] [hailo_media_library] [buffer_pool] [error] [buffer_pool.cpp:174] [acquire] multi_resize_output_0 pool1920x1080_10_y: Buffer acquire failed - no available buffers remai
+ning, please validate the max buffers size you set (10)
+[2018-03-09 13:18:07.318] [648] [13923] [hailo_media_library] [buffer_pool] [error] [buffer_pool.cpp:174] [acquire] multi_resize_output_0 pool1920x1080_10_y: Buffer acquire failed - no available buffers remai
+ning, please validate the max buffers size you set (10)
+[2018-03-09 13:18:07.699] [648] [13923] [hailo_media_library] [buffer_pool] [error] [buffer_pool.cpp:174] [acquire] multi_resize_output_0 pool1920x1080_10_y: Buffer acquire failed - no available buffers remai
+ning, please validate the max buffers size you set (10)
+[FPS] stage=PAUSED fps=0.2
+[STATE_TICK] #408 (phase=3)
+[STATE] -> NULL
+get_ext_ctrls ioctl VIDIOC_G_EXT_CTRLS failed with -1, errno: 11
+[FPS] stage=NULL fps=0
+[STATE_TICK] #409 (phase=3)
+[STATE] -> PLAYING
+^C
+[SIGNAL] SIGINT received, stopping...
