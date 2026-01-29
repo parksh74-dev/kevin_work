@@ -1,3 +1,4 @@
 # This place has all the work Kevin is working on
 
 * hailo-sdk191 : this folder has the examples using hailo h15 sdk 1.9.1
+* gstrawcapturebypass : this folder has the files for generating a gstreamer element, which captures one frame while gstreamer is running.
