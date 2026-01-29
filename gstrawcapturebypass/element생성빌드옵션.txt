@@ -1,0 +1,14 @@
+* Cross Compile Option
+$CC -Wall -fPIC -I$(pkg-config --cflags gstreamer-1.0 gstreamer-base-1.0) -shared -o libgstrawwcapturebypass_h15.so gstrawcapturebypass.c $(pkg-config --libs gstreamer-1.0 gstreamer-base-1.0)
+
+* Set GST_PLUGIN_PATH
+export GST_PLUGIN_PATH=/home/root  # Or wherever you placed the .so file
+
+* Test with gst-inspect
+gst-inspect-1.0 rawcapturebypass
+
+* Clear plugin cache
+rm -rf ~/.cache/gstreamer-1.0/
+rm -rf /root/.cache/gstreamer-1.0/
+
+* script 실행
