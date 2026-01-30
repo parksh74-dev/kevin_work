@@ -267,7 +267,7 @@ int main(int argc, char *argv[]) {
     g_timeout_add_seconds(5, fps_log_cb, nullptr);
     arm_next_state_timer(1); // start state machine
 
-    std::cerr << "[INFO] PLAYING=30s, PAUSED=1s, NULL=1s (recreate)\n";
+    std::cerr << "[INFO] PLAYING=10s, PAUSED=1s, NULL=1s (recreate)\n";
     g_main_loop_run(loop);
 
     gst_element_set_state(pipeline, GST_STATE_NULL);
