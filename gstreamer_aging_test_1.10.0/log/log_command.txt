@@ -1,0 +1,3 @@
+ssh root@10.0.0.1 "dmesg -w -T" | tee dmesg.log
+ssh root@10.0.0.1 "tail -f ~/apps/detection/medialib.log" | tee medialog.log
+ssh root@10.0.0.1 "~/apps/detection/mem_watch.sh" | tee mem_watch.log

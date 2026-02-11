@@ -1,0 +1,34 @@
+[binaries]
+c   = 'aarch64-poky-linux-gcc'
+cpp = 'aarch64-poky-linux-g++'
+ar  = 'aarch64-poky-linux-ar'
+strip = 'aarch64-poky-linux-strip'
+pkgconfig = 'pkg-config'
+
+[properties]
+sys_root = $SDKTARGETSYSROOT
+
+c_args = [
+  '--sysroot=$SDKTARGETSYSROOT',
+  '-mbranch-protection=standard',
+  '-fstack-protector-strong',
+  '-O2',
+  '-D_FORTIFY_SOURCE=2',
+  '-Wformat',
+  '-Wformat-security',
+  '-Werror=format-security'
+]
+
+cpp_args = c_args
+
+c_link_args = [
+  '--sysroot=$SDKTARGETSYSROOT'
+]
+
+cpp_link_args = c_link_args
+
+[host_machine]
+system = 'linux'
+cpu_family = 'aarch64'
+cpu = 'aarch64'
+endian = 'little'
