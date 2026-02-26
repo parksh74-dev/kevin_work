@@ -91,42 +91,17 @@ static void arm_next_state_timer(guint seconds) {
 /* -----------------------
  * State machine callback
  * ----------------------- */
-static bool use_denoise = false;
-
-static const char* frontend_cfg_normal  = "./frontend_config_aging.json";
-static const char* frontend_cfg_denoise = "./frontend_config_aging_denoise.json";
-
-static void apply_frontend_config(GstElement *pipe, const char *path) {
-    GstElement *preproc = gst_bin_get_by_name(GST_BIN(pipe), "preproc");
-    if (!preproc) {
-        std::cerr << "[WARN] Could not find element named 'preproc'\n";
-        return;
-    }
-
-    g_object_set(preproc, "config-file-path", path, nullptr);
-    std::cerr << "[CFG] preproc config-file-path = " << path << "\n";
-    gst_object_unref(preproc);
-}
-
 static gboolean state_machine_cb(gpointer) {
     state_tick++;
     std::cerr << "[STATE_TICK] #" << state_tick
               << " (phase=" << phase_mode << ")\n";
 
     switch (phase) {
-        case Phase::NULL_STATE: {
-            // Toggle config each time we start PLAYING
-            use_denoise = !use_denoise;
-            const char *cfg = use_denoise ? frontend_cfg_denoise : frontend_cfg_normal;
-
-            // Pipeline should be in NULL here, safe time to change properties
-            apply_frontend_config(pipeline, cfg);
-
+        case Phase::NULL_STATE:
             set_pipeline_state(GST_STATE_PLAYING, "PLAYING");
             phase = Phase::PLAYING;
             arm_next_state_timer(10);
             break;
-        }
 
         case Phase::PLAYING:
             set_pipeline_state(GST_STATE_PAUSED, "PAUSED");
